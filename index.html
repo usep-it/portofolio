@@ -477,10 +477,11 @@
                 },
                 body: JSON.stringify({
                     Nama: nama,
-                    email: email, // PERBAIKAN: Gunakan huruf kecil 'email' agar sistem FormSubmit bisa mendeteksi ke mana balasan harus dikirim
+                    email: email,
+                    _replyto: email, // TAMBAHAN WAJIB: Memaksa sistem membalas ke email pengirim
                     Pesan: pesan,
-                    _subject: "Pesan Baru dari Portofolio Web!", // Judul email yang masuk ke Anda
-                    _autoresponse: "Halo " + nama + ",\n\nTerima kasih telah menghubungi saya! Ini adalah pesan otomatis. Saya telah menerima pesan Anda dan akan meresponsnya secepat mungkin.\n\nSalam hangat,\nUsep Suherman" // FITUR BARU: Pesan balasan otomatis untuk si pengirim
+                    _subject: "Pesan Baru dari Portofolio Web!", 
+                    _autoresponse: "Halo " + nama + ", terima kasih telah menghubungi saya. Pesan Anda telah saya terima dan akan segera saya balas secepat mungkin. Salam hangat, Usep Suherman." // Dibuat 1 baris (tanpa \n) agar lebih aman dibaca oleh JSON FormSubmit
                 })
             })
             .then(response => {

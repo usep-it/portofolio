@@ -388,7 +388,7 @@
             <div class="flex space-x-6 mb-4 md:mb-0">
                 <a href="#" class="text-slate-400 hover:text-primary transition text-xl"><i class="fab fa-github"></i></a>
                 <a href="#" class="text-slate-400 hover:text-blue-500 transition text-xl"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="text-slate-400 hover:text-pink-500 transition text-xl"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/usepsherman_" class="text-slate-400 hover:text-pink-500 transition text-xl"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-6 border-t border-slate-100 text-center md:text-left flex flex-col md:flex-row justify-between items-center">
@@ -477,9 +477,10 @@
                 },
                 body: JSON.stringify({
                     Nama: nama,
-                    Email: email,
+                    email: email, // PERBAIKAN: Gunakan huruf kecil 'email' agar sistem FormSubmit bisa mendeteksi ke mana balasan harus dikirim
                     Pesan: pesan,
-                    _subject: "Pesan Baru dari Portofolio Web!" // Judul email yang masuk
+                    _subject: "Pesan Baru dari Portofolio Web!", // Judul email yang masuk ke Anda
+                    _autoresponse: "Halo " + nama + ",\n\nTerima kasih telah menghubungi saya! Ini adalah pesan otomatis. Saya telah menerima pesan Anda dan akan meresponsnya secepat mungkin.\n\nSalam hangat,\nUsep Suherman" // FITUR BARU: Pesan balasan otomatis untuk si pengirim
                 })
             })
             .then(response => {

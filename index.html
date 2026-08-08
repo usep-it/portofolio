@@ -50,6 +50,75 @@
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
             color: #334155;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.theme-dark {
+            background-color: #020817;
+            color: #e2e8f0;
+        }
+
+        body.theme-dark .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.7);
+        }
+
+        body.theme-dark .bg-white,
+        body.theme-dark .bg-slate-50,
+        body.theme-dark .bg-slate-800,
+        body.theme-dark .bg-slate-900,
+        body.theme-dark .bg-dark {
+            box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.12);
+        }
+
+        body.theme-dark .text-dark {
+            color: #f8fafc !important;
+        }
+        body.theme-dark .text-slate-600 { color: #cbd5e1 !important; }
+        body.theme-dark .text-slate-500 { color: #94a3b8 !important; }
+        body.theme-dark .text-slate-700 { color: #e2e8f0 !important; }
+        body.theme-dark .text-slate-400 { color: #cbd5e1 !important; }
+        body.theme-dark .text-slate-300 { color: #cbd5e1 !important; }
+        body.theme-dark .text-slate-200 { color: #e2e8f0 !important; }
+        body.theme-dark .text-slate-100 { color: #f8fafc !important; }
+
+        body.theme-dark .bg-white { background-color: #0f172a !important; }
+        body.theme-dark .bg-slate-50 { background-color: #111827 !important; }
+        body.theme-dark .bg-slate-800 { background-color: #0f172a !important; }
+        body.theme-dark .bg-slate-900 { background-color: #020817 !important; }
+        body.theme-dark .bg-dark { background-color: #020817 !important; }
+
+        body.theme-dark .border-slate-100,
+        body.theme-dark .border-slate-200,
+        body.theme-dark .border-slate-700,
+        body.theme-dark .border-slate-800,
+        body.theme-dark .border-white\/10 {
+            border-color: rgba(148, 163, 184, 0.18) !important;
+        }
+
+        body.theme-dark .shadow-xl,
+        body.theme-dark .shadow-2xl,
+        body.theme-dark .shadow-lg,
+        body.theme-dark .shadow-md,
+        body.theme-dark .shadow-sm {
+            box-shadow: 0 10px 25px rgba(2, 8, 23, 0.45) !important;
+        }
+
+        body.theme-dark .instagram-inner {
+            background: #0f172a;
+        }
+
+        body.theme-dark .skill-badge {
+            background-color: rgba(15, 23, 42, 0.75);
+            color: #e2e8f0;
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        body.theme-dark .rounded-2xl,
+        body.theme-dark .rounded-3xl,
+        body.theme-dark .rounded-xl,
+        body.theme-dark .rounded-full {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .glass-nav {
@@ -65,10 +134,79 @@
             animation: morph 8s ease-in-out infinite;
         }
 
+        .tech-orbit {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .tech-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(99, 102, 241, 0.10) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.10) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
+            animation: gridMove 18s linear infinite;
+        }
+
+        .tech-ring {
+            position: absolute;
+            border: 1px solid rgba(129, 140, 248, 0.42);
+            border-radius: 9999px;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.13);
+            animation: pulseRing 6s ease-in-out infinite;
+        }
+
+        .ring-one { width: 420px; height: 420px; top: 10%; right: 8%; }
+        .ring-two { width: 520px; height: 520px; bottom: 2%; left: 10%; animation-delay: 1s; }
+        .ring-three { width: 300px; height: 300px; top: 30%; left: 42%; animation-delay: 2s; }
+
+        .tech-node {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background: rgba(15, 23, 42, 0.18);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(165, 180, 252, 0.7);
+            box-shadow: 0 0 18px rgba(99, 102, 241, 0.25), inset 0 0 16px rgba(255,255,255,0.06);
+            color: #e0e7ff;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            animation: floatingNode 7s ease-in-out infinite;
+        }
+
+        .tech-node:nth-child(1) { top: 8%; left: 12%; width: 56px; height: 56px; animation-delay: 0s; }
+        .tech-node:nth-child(2) { top: 18%; right: 10%; width: 66px; height: 66px; animation-delay: 1.5s; }
+        .tech-node:nth-child(3) { bottom: 18%; left: 16%; width: 58px; height: 58px; animation-delay: 2.5s; }
+        .tech-node:nth-child(4) { bottom: 12%; right: 17%; width: 52px; height: 52px; animation-delay: 0.8s; }
+        .tech-node:nth-child(5) { top: 42%; left: 54%; width: 46px; height: 46px; animation-delay: 3s; }
+
         @keyframes morph {
             0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
             34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
             67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+        }
+
+        @keyframes floatingNode {
+            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-16px) scale(1.08); opacity: 1; }
+        }
+
+        @keyframes pulseRing {
+            0%, 100% { transform: scale(0.96); opacity: 0.45; }
+            50% { transform: scale(1.04); opacity: 1; }
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(32px, 32px); }
         }
 
         .project-card {
@@ -121,10 +259,16 @@
                     <a href="#proyek" class="text-slate-600 hover:text-primary font-medium transition">Proyek</a>
                     <a href="#sosial" class="text-slate-600 hover:text-primary font-medium transition">Aktivitas</a>
                     <a href="#kontak" class="px-5 py-2.5 rounded-full bg-primary text-white font-semibold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">Kontak Saya</a>
+                    <button id="theme-toggle" type="button" class="ml-2 w-10 h-10 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center justify-center border border-slate-200" aria-label="Ganti tema">
+                        <i class="fas fa-moon text-lg"></i>
+                    </button>
                 </div>
 
                 <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
+                <div class="md:hidden flex items-center gap-2">
+                    <button id="theme-toggle-mobile" type="button" class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center justify-center border border-slate-200" aria-label="Ganti tema">
+                        <i class="fas fa-moon text-lg"></i>
+                    </button>
                     <button id="mobile-menu-btn" class="text-slate-600 hover:text-primary focus:outline-none p-2">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
@@ -150,6 +294,13 @@
         <div class="absolute top-0 right-0 -z-10 w-full h-full overflow-hidden opacity-40 pointer-events-none">
             <div class="absolute -top-24 -right-24 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
             <div class="absolute top-48 -left-24 w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+        </div>
+
+        <div class="tech-orbit">
+            <div class="tech-grid"></div>
+            <div class="tech-ring ring-one"></div>
+            <div class="tech-ring ring-two"></div>
+            <div class="tech-ring ring-three"></div>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -533,7 +684,34 @@
 
     <!-- Scripts -->
     <script>
-        // 1. Mobile Menu Toggle
+        // 1. Theme Toggle
+        const applyTheme = (isDark) => {
+            document.body.classList.toggle('theme-dark', isDark);
+            localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
+
+            const moonIcons = document.querySelectorAll('#theme-toggle i, #theme-toggle-mobile i');
+            moonIcons.forEach((icon) => {
+                icon.classList.toggle('fa-moon', isDark);
+                icon.classList.toggle('fa-sun', !isDark);
+            });
+        };
+
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+        applyTheme(initialDark);
+
+        document.getElementById('theme-toggle')?.addEventListener('click', () => {
+            const isDark = !document.body.classList.contains('theme-dark');
+            applyTheme(isDark);
+        });
+
+        document.getElementById('theme-toggle-mobile')?.addEventListener('click', () => {
+            const isDark = !document.body.classList.contains('theme-dark');
+            applyTheme(isDark);
+        });
+
+        // 2. Mobile Menu Toggle
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const icon = btn.querySelector('i');
@@ -559,7 +737,7 @@
             });
         });
 
-        // 2. Navbar Scroll Effect
+        // 3. Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 20) {
@@ -569,7 +747,7 @@
             }
         });
 
-        // 3. Firebase realtime visitor counter + interactive chart
+        // 4. Firebase realtime visitor counter + interactive chart
         (async function initVisitorCounter() {
             const totalEl = document.getElementById('visitor-total');
             const todayEl = document.getElementById('visitor-today');
@@ -596,14 +774,22 @@
 
             const safeNumber = (value) => Number.isFinite(Number(value)) ? Number(value) : 0;
 
+            // FUNGSI BARU: Mengambil tanggal lokal (WIB) bukan UTC
+            const getLocalDateString = (d) => {
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+
             const getLast7Dates = () => {
                 const dates = [];
                 const todayDate = new Date();
-                todayDate.setHours(0, 0, 0, 0);
+                // Tidak perlu setHours(0,0,0,0) agar tidak terjadi pergeseran hari
                 for (let i = 6; i >= 0; i--) {
                     const date = new Date(todayDate);
                     date.setDate(todayDate.getDate() - i);
-                    dates.push(date.toISOString().slice(0, 10));
+                    dates.push(getLocalDateString(date)); // Gunakan fungsi lokal
                 }
                 return dates;
             };
@@ -726,7 +912,10 @@
 
                 const app = initializeApp(firebaseConfig);
                 const db = getDatabase(app);
-                const today = new Date().toISOString().slice(0, 10);
+                
+                // PERBAIKAN: Gunakan tanggal lokal WIB agar sinkron saat membaca dan menulis
+                const today = getLocalDateString(new Date());
+                
                 const totalRef = ref(db, 'portfolio/visitors/total');
                 const todayRef = ref(db, 'portfolio/visitors/daily/' + today);
                 const historyRef = ref(db, 'portfolio/visitors/history');

@@ -542,10 +542,10 @@
             const trendEl = document.getElementById('visitor-trend');
 
             const fallbackValues = {
-                total: 1248,
-                today: 18,
+                total: 0,
+                today: 0,
                 trend: '7 Hari',
-                chart: [12, 18, 16, 24, 29, 35, 42]
+                chart: [0, 0, 0, 0, 0, 0, 0]
             };
 
             const firebaseConfig = {
@@ -561,11 +561,31 @@
 
             const safeNumber = (value) => Number.isFinite(Number(value)) ? Number(value) : 0;
 
-            const renderChart = (data) => {
+            const buildLast7DaysChart = (historyObject) => {
+                const entries = Object.entries(historyObject || {})
+                    .map(([date, value]) => ({ date, value: safeNumber(value) }))
+                    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                const last7 = entries.slice(-7);
+                const labels = last7.map((item) => {
+                    const date = new Date(item.date + 'T00:00:00');
+                    return date.toLocaleDateString('id-ID', { weekday: 'short' });
+                });
+
+                const values = last7.map((item) => item.value);
+
+                while (values.length < 7) {
+                    values.unshift(0);
+                    labels.unshift('');
+                }
+
+                return { labels: labels.slice(-7), values: values.slice(-7) };
+            };
+
+            const renderChart = (data, labels = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']) => {
                 const chartCanvas = document.getElementById('visitorChart');
                 if (!chartCanvas || typeof Chart === 'undefined') return;
 
-                const labels = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
                 const chartData = Array.isArray(data) && data.length ? data : fallbackValues.chart;
 
                 if (window.visitorChartInstance) {
@@ -575,9 +595,9 @@
                 window.visitorChartInstance = new Chart(chartCanvas, {
                     type: 'line',
                     data: {
-                        labels,
+                        labels: labels.slice(-7),
                         datasets: [{
-                            data: chartData,
+                            data: chartData.slice(-7),
                             borderColor: '#a5b4fc',
                             backgroundColor: 'rgba(165, 180, 252, 0.12)',
                             borderWidth: 2.5,
@@ -649,6 +669,11 @@
                     const currentToday = safeNumber(todaySnapshot.val()) + 1;
                     await set(todayRef, currentToday);
 
+                    const historySnapshot = await get(historyRef);
+                    const historyData = historySnapshot.val() || {};
+                    historyData[today] = safeNumber(historyData[today]) + 1;
+                    await set(historyRef, historyData);
+
                     sessionStorage.setItem(sessionKey, 'true');
                 }
 
@@ -661,12 +686,13 @@
                 });
 
                 onValue(historyRef, (snapshot) => {
-                    const history = snapshot && snapshot.val() ? Object.values(snapshot.val()) : fallbackValues.chart;
-                    if (trendEl) trendEl.textContent = history.length ? `${history.length} Hari` : fallbackValues.trend;
-                    renderChart(history);
+                    const historyData = snapshot && snapshot.val() ? snapshot.val() : {};
+                    const { labels, values } = buildLast7DaysChart(historyData);
+                    if (trendEl) trendEl.textContent = `${values.length} Hari`;
+                    renderChart(values, labels);
                 });
 
-                renderChart(fallbackValues.chart);
+                renderChart(fallbackValues.chart, ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']);
             } catch (error) {
                 console.error('Firebase realtime counter failed:', error);
                 showFallback();

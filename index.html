@@ -22,6 +22,9 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -450,12 +453,20 @@
                 </div>
                 <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
                     <div class="text-3xl font-extrabold text-primary" id="visitor-today">0</div>
-                    <div class="text-sm text-slate-300 mt-2">Hari Ini</div>
+                    <div class="text-sm text-slate-300 mt-2">Pengunjung Hari Ini</div>
                 </div>
                 <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <div class="text-3xl font-extrabold text-primary" id="visitor-online">0</div>
-                    <div class="text-sm text-slate-300 mt-2">Kunjungan Aktif</div>
+                    <div class="text-3xl font-extrabold text-primary" id="visitor-trend">7 Hari</div>
+                    <div class="text-sm text-slate-300 mt-2">Trend Kunjungan</div>
                 </div>
+            </div>
+
+            <div class="mt-8 bg-white/5 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/10">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="text-lg font-bold text-white">Grafik Kunjungan 7 Hari Terakhir</h4>
+                    <span class="text-xs text-slate-300 uppercase tracking-wide">Interactive</span>
+                </div>
+                <canvas id="visitorChart" height="120"></canvas>
             </div>
         </div>
     </section>
@@ -522,16 +533,17 @@
             }
         });
 
-        // 3. Firebase realtime visitor counter
+        // 3. Firebase realtime visitor counter + interactive chart
         (async function initVisitorCounter() {
             const totalEl = document.getElementById('visitor-total');
             const todayEl = document.getElementById('visitor-today');
-            const onlineEl = document.getElementById('visitor-online');
+            const trendEl = document.getElementById('visitor-trend');
 
             const fallbackValues = {
                 total: 1248,
                 today: 18,
-                online: 12
+                trend: '7 Hari',
+                chart: [12, 18, 16, 24, 29, 35, 42]
             };
 
             const firebaseConfig = {
@@ -547,22 +559,75 @@
 
             const safeNumber = (value) => Number.isFinite(Number(value)) ? Number(value) : 0;
 
+            const renderChart = (data) => {
+                const chartCanvas = document.getElementById('visitorChart');
+                if (!chartCanvas || typeof Chart === 'undefined') return;
+
+                const labels = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+                const chartData = Array.isArray(data) && data.length ? data : fallbackValues.chart;
+
+                if (window.visitorChartInstance) {
+                    window.visitorChartInstance.destroy();
+                }
+
+                window.visitorChartInstance = new Chart(chartCanvas, {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{
+                            label: 'Kunjungan',
+                            data: chartData,
+                            borderColor: '#818cf8',
+                            backgroundColor: 'rgba(129, 140, 248, 0.15)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#4f46e5'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                grid: { color: 'rgba(255,255,255,0.08)' },
+                                ticks: { color: '#cbd5e1' }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: '#cbd5e1' }
+                            }
+                        }
+                    }
+                });
+            };
+
             const showFallback = () => {
                 if (totalEl) totalEl.textContent = fallbackValues.total.toLocaleString('id-ID');
                 if (todayEl) todayEl.textContent = fallbackValues.today.toLocaleString('id-ID');
-                if (onlineEl) onlineEl.textContent = fallbackValues.online.toLocaleString('id-ID');
+                if (trendEl) trendEl.textContent = fallbackValues.trend;
+                renderChart(fallbackValues.chart);
             };
 
             try {
                 const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
-                const { getDatabase, ref, set, get, onValue, push, remove, onDisconnect } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js');
+                const { getDatabase, ref, set, get, onValue } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js');
 
                 const app = initializeApp(firebaseConfig);
                 const db = getDatabase(app);
                 const today = new Date().toISOString().slice(0, 10);
                 const totalRef = ref(db, 'portfolio/visitors/total');
                 const todayRef = ref(db, 'portfolio/visitors/daily/' + today);
-                const presenceRef = ref(db, 'portfolio/visitors/presence');
+                const historyRef = ref(db, 'portfolio/visitors/history');
                 const sessionKey = 'portfolioVisitorSession';
                 const sessionValue = sessionStorage.getItem(sessionKey);
 
@@ -586,20 +651,13 @@
                     if (todayEl) todayEl.textContent = safeNumber(snapshot.val()).toLocaleString('id-ID');
                 });
 
-                const connectedRef = ref(db, '.info/connected');
-                onValue(connectedRef, (snap) => {
-                    if (snap.val() === true) {
-                        const uniqueId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-                        const connection = ref(db, `portfolio/visitors/presence/${uniqueId}`);
-                        set(connection, { joinedAt: Date.now() });
-                        onDisconnect(remove(connection));
-                    }
+                onValue(historyRef, (snapshot) => {
+                    const history = snapshot && snapshot.val() ? Object.values(snapshot.val()) : fallbackValues.chart;
+                    if (trendEl) trendEl.textContent = history.length ? `${history.length} Hari` : fallbackValues.trend;
+                    renderChart(history);
                 });
 
-                onValue(presenceRef, (snapshot) => {
-                    const onlineCount = snapshot && snapshot.val() ? Object.keys(snapshot.val()).length : 0;
-                    if (onlineEl) onlineEl.textContent = onlineCount.toLocaleString('id-ID');
-                });
+                renderChart(fallbackValues.chart);
             } catch (error) {
                 console.error('Firebase realtime counter failed:', error);
                 showFallback();

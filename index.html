@@ -225,6 +225,97 @@
             background-color: #4f46e5;
             color: white;
         }
+
+        .certificate-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+        }
+
+        .certificate-image {
+            width: 100%;
+            height: 310px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .certificate-card:hover .certificate-image {
+            transform: scale(1.03);
+        }
+
+        .certificate-tag {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            z-index: 1;
+            background: rgba(79, 70, 229, 0.9);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.45rem 0.8rem;
+            border-radius: 9999px;
+            backdrop-filter: blur(10px);
+        }
+
+        .certificate-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.72);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            padding: 1.5rem;
+        }
+
+        .certificate-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .certificate-modal-panel {
+            position: relative;
+            width: min(900px, 100%);
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 32px 80px rgba(15, 23, 42, 0.35);
+        }
+
+        .certificate-modal-panel img {
+            width: 100%;
+            max-height: 78vh;
+            object-fit: contain;
+            display: block;
+            background: #f8fafc;
+        }
+
+        .certificate-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 9999px;
+            background: rgba(15, 23, 42, 0.8);
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
         
         /* Instagram Section Styling */
         .instagram-wrapper {
@@ -361,31 +452,46 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-sm font-bold text-primary tracking-widest uppercase mb-2">Tentang Saya</h2>
-                <h3 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Dedikasi di Bidang IT & Pelayanan Publik</h3>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Informatics Student • Web Developer • IT & Digital Enthusiast</h3>
                 <div class="w-20 h-1.5 bg-primary mx-auto rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <!-- Tentang Teks -->
                 <div class="order-2 md:order-1">
-                    <h4 class="text-2xl font-bold text-dark mb-4">Profesional Berintegritas & Berorientasi Solusi</h4>
                     <p class="text-slate-600 leading-relaxed mb-4 text-justify">
-                        Saat ini saya berperan sebagai mahasiswa Program Studi Informatika yang mendalami rekayasa perangkat lunak, dan sebagai Aparatur Sipil Negara (ASN).
+                       Saya adalah mahasiswa Informatika Universitas Sebelas April yang memiliki ketertarikan pada pengembangan website, UI/UX, sistem informasi, database, dan digitalisasi administrasi.
                     </p>
                     <p class="text-slate-600 leading-relaxed mb-6 text-justify">
-                        Sebagai <strong>Operator Layanan Operasional di Sub Bagian Umum Dinas Pendidikan Kab. Sumedang</strong>, mengelola tata kelola instansi di Bidang Pendidikan. Pengalaman birokrasi ini sangat relevan dan membantu saya dalam merancang Proyek Skripsi <strong>Sistem Informasi Akademik (SIAKAD)</strong> yang terstruktur, aman, dan tepat guna bagi institusi pendidikan.
+                        Selain belajar dan mengembangkan berbagai proyek teknologi, saya juga memiliki pengalaman dalam pengelolaan teknologi dan administrasi digital di lingkungan sekolah.
                     </p>
-                    
-                    <!-- Keahlian (Skills) -->
-                    <h5 class="text-lg font-bold text-dark mb-4">Keahlian & Teknologi</h5>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default"><i class="fab fa-php mr-1 text-indigo-500"></i> PHP 8</span>
-                        <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default"><i class="fab fa-laravel mr-1 text-red-500"></i> Laravel</span>
-                        <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default"><i class="fas fa-database mr-1 text-blue-500"></i> MySQL</span>
-                        <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default"><i class="fab fa-html5 mr-1 text-orange-500"></i> HTML5 & CSS3</span>
-                        <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default"><i class="fab fa-js mr-1 text-yellow-500"></i> JavaScript</span>
-                        <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default"><i class="fas fa-wind mr-1 text-teal-400"></i> Tailwind CSS</span>
-                    </div>
+                    <p class="text-slate-600 leading-relaxed mb-6 text-justify">
+                        Saya percaya bahwa teknologi yang baik bukan hanya tentang kecanggihan, tetapi tentang menciptakan solusi yang bermanfaat, sederhana, dan mudah digunakan.
+<h5 class="text-lg font-bold text-dark mb-4">Kompetensi & Soft Skills</h5>
+
+<div class="flex flex-wrap gap-3">
+
+    <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default">
+        <i class="fas fa-users mr-1 text-indigo-500"></i> Mampu Bekerja Sama
+    </span>
+
+    <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default">
+        <i class="fas fa-comments mr-1 text-blue-500"></i> Komunikasi Efektif
+    </span>
+
+    <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default">
+        <i class="fas fa-lightbulb mr-1 text-yellow-500"></i> Problem Solving
+    </span>
+
+    <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default">
+        <i class="fas fa-clock mr-1 text-orange-500"></i> Manajemen Waktu
+    </span>
+
+    <span class="skill-badge px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold border border-slate-200 cursor-default">
+        <i class="fas fa-sync-alt mr-1 text-green-500"></i> Adaptif & Fleksibel
+    </span>
+
+</div>
                 </div>
 
                 <!-- Ilustrasi Edukasi -->
@@ -399,12 +505,127 @@
         </div>
     </section>
 
+    <!-- Experience & Timeline Section -->
+    <section id="pengalaman" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-sm font-bold text-primary tracking-widest uppercase mb-2">Pendidikan, Pengalaman & Organisasi</h2>
+                <p class="text-slate-500 text-lg">Jejak belajar, pengalaman organisasi, dan perkembangan keterampilan saya di bidang teknologi dan layanan publik.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-3xl p-7 shadow-xl border border-slate-100">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-primary flex items-center justify-center mr-4">
+                            <i class="fas fa-graduation-cap text-xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-dark">Pendidikan</h4>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="relative pl-6 border-l-2 border-indigo-200">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary"></div>
+                            <p class="text-sm font-semibold text-primary">2022 - Sekarang</p>
+                            <h5 class="text-lg font-bold text-dark mt-1">Mahasiswa Informatika</h5>
+                            <p class="text-slate-600">Universitas Sebelas April</p>
+                        </div>
+
+                        <div class="relative pl-6 border-l-2 border-indigo-200">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary"></div>
+                            <p class="text-sm font-semibold text-primary">2019 - 2022</p>
+                            <h5 class="text-lg font-bold text-dark mt-1">SMK Informatika Sumedang</h5>
+                            <p class="text-slate-600">Latar belakang dasar pendidikan yang membentuk minat pada teknologi dan problem solving.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-7 shadow-xl border border-slate-100">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-briefcase text-xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-dark">Pengalaman & Organisasi</h4>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="relative pl-6 border-l-2 border-purple-200">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-purple-500"></div>
+                            <p class="text-sm font-semibold text-purple-600">2022 - Sekarang</p>
+                            <h5 class="text-lg font-bold text-dark mt-1">Operator Layanan Operasional</h5>
+                            <p class="text-slate-600">Sub Bagian Umum | Dinas Pendidikan Kab. Sumedang</p>
+                        </div>
+
+                        <div class="relative pl-6 border-l-2 border-purple-200">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-purple-500"></div>
+                            <p class="text-sm font-semibold text-purple-600">Periode 2023/2024</p>
+                            <h5 class="text-lg font-bold text-dark mt-1">Anggota Departemen Media & Kominfo</h5>
+                            <p class="text-slate-600">Himpunan Mahasiswa Informatika</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 grid grid-cols-1 xl:grid-cols-2 gap-8">
+
+                <div class="bg-white rounded-3xl p-7 shadow-xl border border-slate-100">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-dark">Skill Progression</h4>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold text-slate-600 mb-1">
+                                <span>PHP & Laravel</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full w-[90%] bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold text-slate-600 mb-1">
+                                <span>MySQL & Database</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full w-[85%] bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold text-slate-600 mb-1">
+                                <span>HTML / CSS / Tailwind</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full w-[88%] bg-gradient-to-r from-pink-500 to-orange-400 rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold text-slate-600 mb-1">
+                                <span>JavaScript / UI Logic</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full w-[80%] bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="proyek" class="py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-sm font-bold text-primary tracking-widest uppercase mb-2">Portofolio</h2>
-                <h3 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Proyek & Karya Terbaru</h3>
                 <p class="text-slate-500 text-lg">Implementasi nyata dari ilmu Informatika yang diintegrasikan dengan pemahaman pelayanan publik.</p>
             </div>
 
@@ -478,6 +699,61 @@
             </div>
         </div>
     </section>
+
+    <!-- Certificates Section -->
+    <section id="sertifikat" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-sm font-bold text-primary tracking-widest uppercase mb-2">Certificates</h2>
+                <p class="text-slate-500 text-lg">Kompetensi dan penghargaan yang menunjang pengalaman serta keahlian saya di bidang teknologi dan pelayanan publik.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <div class="certificate-card bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-xl" data-certificate-open data-title="Sertifikat Web Development" data-image="sertifikat/ujikom.png">
+                    <span class="certificate-tag">Sertifikasi Kompetensi</span>
+                    <img src="sertifikat/ujikom.png" alt="Sertifikasi Kompetensi" class="certificate-image">
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-dark mb-2">Uji Kompetensi Keahlian – Rekayasa Perangkat Lunak</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Sertifikat kompetensi yang diperoleh setelah mengikuti Uji Kompetensi Keahlian (UKK) pada bidang Rekayasa Perangkat Lunak, dengan penugasan membuat Aplikasi Catatan Perjalanan. Memperoleh predikat Sangat Kompeten (Very Competent).</p>
+                    </div>
+                </div>
+
+                <div class="certificate-card bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-xl" data-certificate-open data-title="Prestasi Akademik & Teknologi" data-image="sertifikat/Wardani.jpg">
+                    <span class="certificate-tag">Pelatihan</span>
+                    <img src="sertifikat/Wardani.jpg" alt="JobReady Employability Skills – Basic Level" class="certificate-image">
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-dark mb-2">JobReady Employability Skills – Basic Level</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Sertifikat penyelesaian program pelatihan JobReady Employability Skills tingkat Basic dari Wadhwani Foundation, yang memberikan pengetahuan dasar mengenai konsep dan keterampilan kesiapan kerja (employability skills). Program ini diselesaikan dalam 123 jam pelatihan.</p>
+                    </div>
+                </div>
+
+                <div class="certificate-card bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-xl" data-certificate-open data-title="Sertifikat Profesional" data-image="sertifikat/Panitia.jpg">
+                    <span class="certificate-tag">Kepanitiaan</span>
+                    <img src="sertifikat/Panitia.jpg" alt="Committee – Webinar Cyber Security X HIMTIKA" class="certificate-image">
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-dark mb-2">Committee – Webinar Cyber Security X HIMTIKA</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Sertifikat partisipasi sebagai anggota kepanitiaan dalam kegiatan Webinar Cyber Security X HIMTIKA yang diselenggarakan oleh HIMTIKA UNSAP pada 10 November 2024. Kegiatan ini berkaitan dengan wawasan dan edukasi mengenai keamanan siber.</p>
+                    </div>
+                </div>
+
+                <div class="certificate-card bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-xl" data-certificate-open data-title="Sertifikat Profesional" data-image="sertifikat/Cyber.jpg">
+                    <span class="certificate-tag">Webinar</span>
+                    <img src="sertifikat/Cyber.jpg" alt="Webinar Cyber Ethic" class="certificate-image">
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-dark mb-2">Webinar Cyber Ethic</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">Apresiasi atas partisipasi dalam webinar Cyber Ethics yang membahas etika, keamanan, dan tanggung jawab dalam penggunaan teknologi dan media digital.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="certificate-modal" class="certificate-modal" aria-hidden="true">
+        <div class="certificate-modal-panel">
+            <button type="button" id="certificate-close" class="certificate-modal-close" aria-label="Tutup modal">×</button>
+            <img id="certificate-modal-image" src="" alt="Preview Sertifikat">
+        </div>
+    </div>
 
     <!-- SECTION BARU: INSTAGRAM & LINKEDIN FEED INTEGRATION -->
     <section id="sosial" class="py-20 bg-white">
@@ -684,7 +960,41 @@
 
     <!-- Scripts -->
     <script>
-        // 1. Theme Toggle
+        // 1. Certificate modal
+        const certificateModal = document.getElementById('certificate-modal');
+        const certificateModalImage = document.getElementById('certificate-modal-image');
+        const certificateClose = document.getElementById('certificate-close');
+
+        document.querySelectorAll('[data-certificate-open]').forEach((card) => {
+            card.addEventListener('click', () => {
+                const image = card.dataset.image;
+                const title = card.dataset.title || 'Sertifikat';
+                certificateModalImage.src = image;
+                certificateModalImage.alt = title;
+                certificateModal.classList.add('show');
+                certificateModal.setAttribute('aria-hidden', 'false');
+            });
+        });
+
+        const closeCertificateModal = () => {
+            certificateModal.classList.remove('show');
+            certificateModal.setAttribute('aria-hidden', 'true');
+        };
+
+        certificateClose.addEventListener('click', closeCertificateModal);
+        certificateModal.addEventListener('click', (event) => {
+            if (event.target === certificateModal) {
+                closeCertificateModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && certificateModal.classList.contains('show')) {
+                closeCertificateModal();
+            }
+        });
+
+        // 2. Theme Toggle
         const applyTheme = (isDark) => {
             document.body.classList.toggle('theme-dark', isDark);
             localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');

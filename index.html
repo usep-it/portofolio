@@ -80,6 +80,18 @@
             background-color: #4f46e5;
             color: white;
         }
+        
+        /* Instagram Section Styling */
+        .instagram-wrapper {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            padding: 3px;
+            border-radius: 24px;
+        }
+        .instagram-inner {
+            background: #fff;
+            border-radius: 21px;
+            padding: 30px;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-primary selection:text-white">
@@ -91,7 +103,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="#" class="text-2xl font-extrabold text-dark tracking-tight">
-                        <span class="text-primary">Usep Suherman</span>
+                        Usep Suherman<span class="text-primary">.</span>
                     </a>
                 </div>
                 
@@ -100,6 +112,7 @@
                     <a href="#beranda" class="text-slate-600 hover:text-primary font-medium transition">Beranda</a>
                     <a href="#tentang" class="text-slate-600 hover:text-primary font-medium transition">Tentang</a>
                     <a href="#proyek" class="text-slate-600 hover:text-primary font-medium transition">Proyek</a>
+                    <a href="#sosial" class="text-slate-600 hover:text-primary font-medium transition">Aktivitas</a>
                     <a href="#kontak" class="px-5 py-2.5 rounded-full bg-primary text-white font-semibold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">Kontak Saya</a>
                 </div>
 
@@ -118,6 +131,7 @@
                 <a href="#beranda" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-primary">Beranda</a>
                 <a href="#tentang" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-primary">Tentang</a>
                 <a href="#proyek" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-primary">Proyek</a>
+                <a href="#sosial" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-primary">Aktivitas IG</a>
                 <a href="#kontak" class="block px-3 py-3 mt-4 rounded-md text-base font-medium bg-primary text-white text-center shadow-md">Kontak Saya</a>
             </div>
         </div>
@@ -307,8 +321,56 @@
         </div>
     </section>
 
+    <!-- SECTION BARU: INSTAGRAM FEED INTEGRATION -->
+    <section id="sosial" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-sm font-bold text-pink-500 tracking-widest uppercase mb-2">Aktivitas Sosial</h2>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">Postingan Instagram Terbaru</h3>
+                <p class="text-slate-500 text-lg">Ikuti keseharian, update proyek, dan aktivitas saya di Instagram <a href="https://instagram.com/usepsherman_" target="_blank" class="text-primary font-bold hover:underline">@usepsherman_</a></p>
+            </div>
+
+            <div class="instagram-wrapper shadow-xl max-w-5xl mx-auto">
+                <div class="instagram-inner">
+                    <!-- 
+                        CARA MENGAKTIFKAN INSTAGRAM FEED:
+                        1. Kunjungi https://elfsight.com/instagram-feed-instashow/
+                        2. Daftar akun gratis dan buat widget Instagram Feed.
+                        3. Hubungkan ke akun Instagram Anda (@usepsherman_).
+                        4. Copy kode script yang diberikan Elfsight, lalu paste di bawah tulisan ini 
+                           (menggantikan div placeholder-feed).
+                    -->
+                    
+                    <!-- PLACEHOLDER SEMENTARA (Hapus ini jika kode Elfsight sudah ada) 
+                    <div id="placeholder-feed" class="text-center py-16 bg-slate-50 rounded-xl border-2 border-dashed border-slate-300">
+                        <i class="fab fa-instagram text-6xl text-pink-500 mb-4 opacity-50"></i>
+                        <h4 class="text-xl font-bold text-slate-700 mb-2">Instagram Feed Terhubung</h4>
+                        <p class="text-slate-500 mb-6">Silakan pasang kode widget Elfsight/Behold di dalam file HTML untuk memunculkan foto otomatis.</p>
+                        <a href="https://elfsight.com/instagram-feed-instashow/" target="_blank" class="px-6 py-2.5 bg-slate-800 text-white font-semibold rounded-lg hover:bg-slate-700 transition">
+                            Dapatkan Kode Widget Gratis
+                        </a>
+                    </div> -->
+                    <!-- AKHIR PLACEHOLDER -->
+
+                    <!-- CONTOH TEMPAT PASTE KODE ELFSIGHT ANDA NANTI -->
+                    <!-- <script src="https://static.elfsight.com/p/platform.js" defer></script> -->
+                    <!-- <div class="elfsight-app-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"></div> -->
+                    <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+                    <script src="https://elfsightcdn.com/platform.js" async></script>
+                    <div class="elfsight-app-6f4c2623-db59-44e0-ab31-a6f1ae0969ad" data-elfsight-app-lazy></div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <a href="https://instagram.com/usepsherman_" target="_blank" class="inline-flex items-center font-bold text-slate-600 hover:text-pink-600 transition">
+                    <i class="fab fa-instagram mr-2 text-xl"></i> Kunjungi Profil Instagram Saya
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
-    <section id="kontak" class="py-20 bg-white">
+    <section id="kontak" class="py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-dark rounded-3xl overflow-hidden shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-2">
@@ -326,7 +388,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-slate-500">Email</p>
-                                    <p class="font-medium text-white">contact@usep-suherman.my.id</p>
+                                    <p class="font-medium text-white">suhermanusep30@gmail.com</p>
                                 </div>
                             </div>
                             <div class="flex items-center text-slate-300">
@@ -335,7 +397,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-slate-500">LinkedIn</p>
-                                    <p class="font-medium text-white">https://www.linkedin.com/in/usep-suherman-257673318/</p>
+                                    <p class="font-medium text-white">linkedin.com/in/usep-suherman</p>
                                 </div>
                             </div>
                             <div class="flex items-center text-slate-300">
@@ -350,8 +412,8 @@
                         </div>
                     </div>
 
-                    <!-- Form Sederhana -->
-                    <div class="bg-slate-800 p-10 md:p-16 flex flex-col justify-center">
+                    <!-- Form Sederhana dengan AJAX & Autoresponse -->
+                    <div class="bg-slate-800 p-10 md:p-16 flex flex-col justify-center border-l border-slate-700">
                         <form id="contact-form" action="#" method="POST" class="space-y-6" onsubmit="kirimPesanKeEmail(event)">
                             <div>
                                 <label for="name" class="block text-sm font-medium text-slate-400 mb-2">Nama Lengkap</label>
@@ -368,8 +430,8 @@
                             <button type="submit" id="btn-submit" class="w-full py-3.5 bg-primary text-white font-bold rounded-lg hover:bg-indigo-600 transition shadow-lg flex justify-center items-center">
                                 <span>Kirim Pesan</span> <i class="fas fa-paper-plane ml-2" id="icon-submit"></i>
                             </button>
-                            <p id="form-msg" class="text-green-400 text-sm text-center hidden mt-3 font-semibold"><i class="fas fa-check-circle mr-1"></i> Pesan berhasil dikirim ke email Anda!</p>
-                            <p id="form-err" class="text-red-400 text-sm text-center hidden mt-3 font-semibold"><i class="fas fa-times-circle mr-1"></i> Gagal mengirim pesan. Coba lagi.</p>
+                            <p id="form-msg" class="text-green-400 text-sm text-center hidden mt-3 font-semibold"><i class="fas fa-check-circle mr-1"></i> Pesan terkirim! Silakan cek email Anda untuk balasan otomatis.</p>
+                            <p id="form-err" class="text-red-400 text-sm text-center hidden mt-3 font-semibold"><i class="fas fa-times-circle mr-1"></i> Gagal mengirim pesan. Coba lagi nanti.</p>
                         </form>
                     </div>
                 </div>
@@ -380,22 +442,22 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 pt-12 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0">
+            <div class="mb-4 md:mb-0 text-center md:text-left">
                 <span class="text-2xl font-extrabold text-dark tracking-tight">Usep Suherman,<span class="text-primary"> S.Kom.</span></span>
                 <p class="text-slate-500 text-sm mt-1">Sub Bagian Umum | Dinas Pendidikan Sumedang.</p>
             </div>
             
             <div class="flex space-x-6 mb-4 md:mb-0">
-                <a href="https://github.com/usep-it" class="text-slate-400 hover:text-primary transition text-xl"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/usep-suherman-257673318/" class="text-slate-400 hover:text-blue-500 transition text-xl"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/usepsherman_" class="text-slate-400 hover:text-pink-500 transition text-xl"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/usep-it" target="_blank" class="text-slate-400 hover:text-primary transition text-2xl"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/usep-suherman-257673318/" target="_blank" class="text-slate-400 hover:text-blue-500 transition text-2xl"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/usepsherman_" target="_blank" class="text-slate-400 hover:text-pink-500 transition text-2xl"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-6 border-t border-slate-100 text-center md:text-left flex flex-col md:flex-row justify-between items-center">
-            <p class="text-slate-500 text-sm">
+            <p class="text-slate-500 text-sm mb-2 md:mb-0">
                 &copy; <script>document.write(new Date().getFullYear())</script> Usep Suherman. All rights reserved.
             </p>
-            <p class="text-slate-400 text-sm mt-2 md:mt-0 flex items-center">
+            <p class="text-slate-400 text-sm flex items-center justify-center md:justify-end">
                 Dibuat dengan <i class="fas fa-heart text-red-500 mx-1"></i> menggunakan HTML & Tailwind CSS
             </p>
         </div>
@@ -429,7 +491,7 @@
             });
         });
 
-        // 2. Navbar Scroll Effect (Glassmorphism shadow)
+        // 2. Navbar Scroll Effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 20) {
@@ -439,35 +501,29 @@
             }
         });
 
-        // 3. Form Simulation message (Fixed Autoresponse & ReplyTo for JSON AJAX)
-         function kirimPesanKeEmail(event) {
-            // Mencegah halaman reload
-            event.preventDefault();
+        // 3. Form Submit dengan AJAX & Balasan Otomatis
+        function kirimPesanKeEmail(event) {
+            event.preventDefault(); // Mencegah pindah halaman
 
-            // Ambil elemen form dan tombol
             const form = document.getElementById('contact-form');
             const btnSubmit = document.getElementById('btn-submit');
             const msgSuccess = document.getElementById('form-msg');
             const msgError = document.getElementById('form-err');
 
-            // Sembunyikan pesan sebelumnya
             msgSuccess.classList.add('hidden');
             msgError.classList.add('hidden');
 
-            // Ubah tombol menjadi mode loading
             const originalBtnText = btnSubmit.innerHTML;
             btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Mengirim...';
             btnSubmit.disabled = true;
 
-            // Ambil data dari inputan
             const nama = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value; // email pengirim
             const pesan = document.getElementById('message').value;
 
-            // GANTI EMAIL INI DENGAN EMAIL ASLI ANDA (Atau endpoint random string FormSubmit jika sudah aktivasi)
+            // GANTI DENGAN EMAIL ASLI ANDA
             const emailTujuan = "suhermanusep30@gmail.com"; 
 
-            // Kirim data ke FormSubmit via AJAX
             fetch(`https://formsubmit.co/ajax/${emailTujuan}`, {
                 method: "POST",
                 headers: {
@@ -476,30 +532,26 @@
                 },
                 body: JSON.stringify({
                     Nama: nama,
-                    email: email, 
+                    email: email, // WAJIB huruf kecil agar formsubmit mendeteksi ini sebagai email pengirim
                     Pesan: pesan,
                     _subject: "Pesan Baru dari Portofolio Web!", 
-                    _replyto: email, // Memaksa email pengirim terbaca sebagai tujuan "Reply To" dan "Autoresponse"
-                    _autoresponse: "Halo " + nama + ", Terima kasih telah menghubungi saya! Ini adalah pesan otomatis. Saya telah menerima pesan Anda dan akan meresponsnya secepat mungkin. Salam hangat, Usep Suherman" 
+                    _replyto: email, // WAJIB untuk memicu autoresponse ke alamat yang benar
+                    _autoresponse: "Halo " + nama + ", Terima kasih telah mengunjungi portofolio saya dan mengirimkan pesan. Saya telah menerima pesan Anda dan akan segera merespons secepat mungkin. Salam hangat, Usep Suherman"
                 })
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Response status: ${response.status}`);
-                }
+                if (!response.ok) throw new Error("Gagal mengirim");
                 return response.json();
             })
             .then(data => {
                 msgSuccess.classList.remove('hidden');
-                form.reset(); // Kosongkan form
-
-                setTimeout(() => {
-                    msgSuccess.classList.add('hidden');
-                }, 5000);
+                form.reset();
+                setTimeout(() => msgSuccess.classList.add('hidden'), 6000);
             })
             .catch(error => {
-                console.error('Form submission error:', error);
+                console.error(error);
                 msgError.classList.remove('hidden');
+                setTimeout(() => msgError.classList.add('hidden'), 5000);
             })
             .finally(() => {
                 btnSubmit.innerHTML = originalBtnText;

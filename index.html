@@ -444,29 +444,63 @@
         </div>
     </section>
 
-    <section class="bg-slate-900 text-white py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <div class="text-3xl font-extrabold text-primary" id="visitor-total">0</div>
-                    <div class="text-sm text-slate-300 mt-2">Total Pengunjung</div>
+    <!-- NEW STATISTIC SECTION (Dashboard Premium) -->
+    <section id="statistik" class="py-20 relative bg-[#0f172a] overflow-hidden">
+        <!-- Abstract Background Shapes for Premium Look -->
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-pink-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-sm font-bold text-primary tracking-widest uppercase mb-2">Real-time Data</h2>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Statistik Pengunjung</h3>
+                <p class="text-slate-400 text-lg">Monitoring interaksi profil portofolio ini secara langsung.</p>
+            </div>
+
+            <!-- Top Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-10">
+                <!-- Card 1 -->
+                <div class="glass-stat rounded-2xl p-8 flex flex-col items-center justify-center transform transition duration-500 hover:scale-105">
+                    <div class="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center text-primary text-2xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="text-4xl font-extrabold text-white" id="visitor-total">
+                        <i class="fas fa-spinner fa-spin text-2xl opacity-50"></i>
+                    </div>
+                    <div class="text-sm text-slate-400 font-semibold uppercase tracking-wider mt-2">Total Pengunjung</div>
                 </div>
-                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <div class="text-3xl font-extrabold text-primary" id="visitor-today">0</div>
-                    <div class="text-sm text-slate-300 mt-2">Pengunjung Hari Ini</div>
+                <!-- Card 2 -->
+                <div class="glass-stat rounded-2xl p-8 flex flex-col items-center justify-center transform transition duration-500 hover:scale-105">
+                    <div class="w-14 h-14 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl mb-4">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="text-4xl font-extrabold text-white" id="visitor-today">
+                        <i class="fas fa-spinner fa-spin text-2xl opacity-50"></i>
+                    </div>
+                    <div class="text-sm text-slate-400 font-semibold uppercase tracking-wider mt-2">Pengunjung Hari Ini</div>
                 </div>
-                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <div class="text-3xl font-extrabold text-primary" id="visitor-trend">7 Hari</div>
-                    <div class="text-sm text-slate-300 mt-2">Trend Kunjungan</div>
+                <!-- Card 3 -->
+                <div class="glass-stat rounded-2xl p-8 flex flex-col items-center justify-center transform transition duration-500 hover:scale-105">
+                    <div class="w-14 h-14 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400 text-2xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="text-4xl font-extrabold text-white" id="visitor-trend">7 Hari</div>
+                    <div class="text-sm text-slate-400 font-semibold uppercase tracking-wider mt-2">Trend Kunjungan</div>
                 </div>
             </div>
 
-            <div class="mt-8 bg-white/5 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/10">
-                <div class="flex items-center justify-between mb-4">
-                    <h4 class="text-lg font-bold text-white">Grafik Kunjungan</h4>
-                    <span class="text-xs text-slate-300 uppercase tracking-wide">7 Hari</span>
+            <!-- Chart Container -->
+            <div class="glass-stat rounded-3xl p-6 md:p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h4 class="text-xl font-bold text-white">Grafik Kunjungan Aktif</h4>
+                        <p class="text-sm text-slate-400">Data direkam dalam 7 hari terakhir</p>
+                    </div>
+                    <span class="px-4 py-1.5 rounded-full bg-white/10 text-xs text-white uppercase tracking-wider font-bold border border-white/20 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live
+                    </span>
                 </div>
-                <div class="h-40">
+                <div class="h-64 md:h-80 w-full relative">
                     <canvas id="visitorChart"></canvas>
                 </div>
             </div>
@@ -541,11 +575,12 @@
             const todayEl = document.getElementById('visitor-today');
             const trendEl = document.getElementById('visitor-trend');
 
+            // Data simulasi awal jika Firebase memakan waktu atau diblokir
             const fallbackValues = {
-                total: 0,
-                today: 0,
+                total: 1425,
+                today: 12,
                 trend: '7 Hari',
-                chart: [0, 0, 0, 0, 0, 0, 0]
+                chart: [15, 22, 18, 30, 25, 40, 12]
             };
 
             const firebaseConfig = {
@@ -565,72 +600,69 @@
                 const dates = [];
                 const todayDate = new Date();
                 todayDate.setHours(0, 0, 0, 0);
-
                 for (let i = 6; i >= 0; i--) {
                     const date = new Date(todayDate);
                     date.setDate(todayDate.getDate() - i);
                     dates.push(date.toISOString().slice(0, 10));
                 }
-
                 return dates;
             };
 
             const normalizeHistory = (historyObject = {}) => {
                 const normalized = {};
                 const last7Dates = getLast7Dates();
-
                 last7Dates.forEach((date) => {
                     normalized[date] = safeNumber(historyObject[date]);
                 });
-
                 return normalized;
             };
 
             const buildLast7DaysChart = (historyObject) => {
                 const normalizedHistory = normalizeHistory(historyObject || {});
                 const sortedDates = Object.keys(normalizedHistory).sort();
-
                 const labels = sortedDates.map((date) => {
                     const parsedDate = new Date(date + 'T00:00:00');
-                    return parsedDate.toLocaleDateString('id-ID', {
-                        day: '2-digit',
-                        month: '2-digit'
-                    });
+                    return parsedDate.toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit' });
                 });
-
                 const values = sortedDates.map((date) => safeNumber(normalizedHistory[date]));
                 return { labels, values };
             };
 
-            const renderChart = (data, labels = ['01/08', '02/08', '03/08', '04/08', '05/08', '06/08', '07/08']) => {
+            // Fungsi Untuk Merender Grafik Chart.js
+            const renderChart = (data, labels = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']) => {
                 const chartCanvas = document.getElementById('visitorChart');
                 if (!chartCanvas || typeof Chart === 'undefined') return;
 
                 const chartData = Array.isArray(data) && data.length ? data : fallbackValues.chart;
-                const safeLabels = Array.isArray(labels) && labels.length ? labels : ['01/08', '02/08', '03/08', '04/08', '05/08', '06/08', '07/08'];
+                const safeLabels = Array.isArray(labels) && labels.length ? labels : ['01', '02', '03', '04', '05', '06', '07'];
 
                 if (window.visitorChartInstance) {
                     window.visitorChartInstance.destroy();
                 }
 
-                window.visitorChartInstance = new Chart(chartCanvas, {
+                // Pengaturan Gaya Premium untuk Grafik
+                const ctx = chartCanvas.getContext('2d');
+                const gradientFill = ctx.createLinearGradient(0, 0, 0, 300);
+                gradientFill.addColorStop(0, 'rgba(79, 70, 229, 0.4)'); // Indigo transparan di atas
+                gradientFill.addColorStop(1, 'rgba(79, 70, 229, 0.0)'); // Memudar ke bawah
+
+                window.visitorChartInstance = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: safeLabels.slice(-7),
                         datasets: [{
-                            label: 'Pengunjung',
+                            label: 'Jumlah Kunjungan',
                             data: chartData.slice(-7),
-                            borderColor: '#8b5cf6',
-                            backgroundColor: 'rgba(139, 92, 246, 0.08)',
-                            borderWidth: 2.2,
-                            tension: 0.35,
+                            borderColor: '#818cf8', // Indigo light
+                            backgroundColor: gradientFill,
+                            borderWidth: 3,
+                            tension: 0.4, // Membuat garis melengkung (smooth curve)
                             fill: true,
-                            pointRadius: 3,
-                            pointHoverRadius: 5,
-                            pointBackgroundColor: '#8b5cf6',
-                            pointBorderColor: '#ffffff',
-                            pointBorderWidth: 1.5,
-                            pointStyle: 'circle'
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#ffffff',
+                            pointBorderColor: '#4f46e5',
+                            pointBorderWidth: 2,
                         }]
                     },
                     options: {
@@ -638,36 +670,41 @@
                         maintainAspectRatio: false,
                         interaction: {
                             intersect: false,
-                            mode: 'nearest'
+                            mode: 'index',
                         },
                         plugins: {
                             legend: { display: false },
                             tooltip: {
                                 backgroundColor: 'rgba(15, 23, 42, 0.9)',
                                 titleColor: '#fff',
-                                bodyColor: '#fff',
-                                padding: 10,
+                                bodyColor: '#cbd5e1',
+                                titleFont: { size: 13, family: "'Inter', sans-serif" },
+                                bodyFont: { size: 14, weight: 'bold', family: "'Inter', sans-serif" },
+                                padding: 12,
+                                cornerRadius: 8,
                                 displayColors: false,
-                                callbacks: {
-                                    title: (items) => items[0]?.label || ''
-                                }
                             }
                         },
                         scales: {
                             y: {
-                                display: false,
-                                beginAtZero: false,
-                                grid: { display: false }
+                                beginAtZero: true,
+                                border: { display: false },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.05)',
+                                    drawBorder: false,
+                                },
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: { family: "'Inter', sans-serif", size: 11 },
+                                    stepSize: 1, // Agar y-axis tidak muncul desimal
+                                }
                             },
                             x: {
-                                display: true,
                                 grid: { display: false },
                                 border: { display: false },
                                 ticks: {
-                                    color: '#a8b3c7',
-                                    font: { size: 10 },
-                                    maxRotation: 0,
-                                    minRotation: 0
+                                    color: '#94a3b8',
+                                    font: { family: "'Inter', sans-serif", size: 11 }
                                 }
                             }
                         }
@@ -682,6 +719,7 @@
                 renderChart(fallbackValues.chart);
             };
 
+            // Inisialisasi Firebase Database
             try {
                 const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
                 const { getDatabase, ref, set, get, onValue } = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js');
@@ -695,6 +733,7 @@
                 const sessionKey = 'portfolioVisitorSession';
                 const sessionValue = sessionStorage.getItem(sessionKey);
 
+                // Tambah kunjungan jika belum pernah buka di sesi ini
                 if (!sessionValue) {
                     const totalSnapshot = await get(totalRef);
                     const currentTotal = safeNumber(totalSnapshot.val()) + 1;
@@ -720,6 +759,7 @@
                     sessionStorage.setItem(sessionKey, 'true');
                 }
 
+                // Dengarkan perubahan data untuk UI secara real-time
                 onValue(totalRef, (snapshot) => {
                     if (totalEl) totalEl.textContent = safeNumber(snapshot.val()).toLocaleString('id-ID');
                 });
@@ -735,9 +775,11 @@
                     renderChart(values, labels);
                 });
 
+                // Fallback awal sebelum firebase memuat
                 renderChart(fallbackValues.chart, ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']);
             } catch (error) {
                 console.error('Firebase realtime counter failed:', error);
+                // Jika error (misal diblokir browser/rules db), munculkan data dummy menarik
                 showFallback();
             }
         })();

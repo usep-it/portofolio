@@ -463,10 +463,12 @@
 
             <div class="mt-8 bg-white/5 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/10">
                 <div class="flex items-center justify-between mb-4">
-                    <h4 class="text-lg font-bold text-white">Grafik Kunjungan 7 Hari Terakhir</h4>
-                    <span class="text-xs text-slate-300 uppercase tracking-wide">Interactive</span>
+                    <h4 class="text-lg font-bold text-white">Grafik Kunjungan</h4>
+                    <span class="text-xs text-slate-300 uppercase tracking-wide">7 Hari</span>
                 </div>
-                <canvas id="visitorChart" height="120"></canvas>
+                <div class="h-40">
+                    <canvas id="visitorChart"></canvas>
+                </div>
             </div>
         </div>
     </section>
@@ -575,36 +577,43 @@
                     data: {
                         labels,
                         datasets: [{
-                            label: 'Kunjungan',
                             data: chartData,
-                            borderColor: '#818cf8',
-                            backgroundColor: 'rgba(129, 140, 248, 0.15)',
-                            borderWidth: 3,
-                            tension: 0.4,
+                            borderColor: '#a5b4fc',
+                            backgroundColor: 'rgba(165, 180, 252, 0.12)',
+                            borderWidth: 2.5,
+                            tension: 0.35,
                             fill: true,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#4f46e5'
+                            pointRadius: 0,
+                            pointHoverRadius: 4,
+                            pointBackgroundColor: '#e2e8f0'
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
                         interaction: {
-                            mode: 'index',
-                            intersect: false
+                            intersect: false,
+                            mode: 'nearest'
                         },
                         plugins: {
-                            legend: { display: false }
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                padding: 10,
+                                displayColors: false
+                            }
                         },
                         scales: {
                             y: {
-                                beginAtZero: false,
-                                grid: { color: 'rgba(255,255,255,0.08)' },
-                                ticks: { color: '#cbd5e1' }
+                                display: false,
+                                beginAtZero: false
                             },
                             x: {
+                                display: true,
                                 grid: { display: false },
-                                ticks: { color: '#cbd5e1' }
+                                ticks: { color: '#cbd5e1', font: { size: 11 } }
                             }
                         }
                     }

@@ -561,25 +561,41 @@
 
             const safeNumber = (value) => Number.isFinite(Number(value)) ? Number(value) : 0;
 
-            const buildLast7DaysChart = (historyObject) => {
-                const entries = Object.entries(historyObject || {})
-                    .map(([date, value]) => ({ date, value: safeNumber(value) }))
-                    .sort((a, b) => new Date(a.date) - new Date(b.date));
+            const getLast7Dates = () => {
+                const dates = [];
+                const todayDate = new Date();
+                todayDate.setHours(0, 0, 0, 0);
 
-                const last7 = entries.slice(-7);
-                const labels = last7.map((item) => {
-                    const date = new Date(item.date + 'T00:00:00');
-                    return date.toLocaleDateString('id-ID', { weekday: 'short' });
-                });
-
-                const values = last7.map((item) => item.value);
-
-                while (values.length < 7) {
-                    values.unshift(0);
-                    labels.unshift('');
+                for (let i = 6; i >= 0; i--) {
+                    const date = new Date(todayDate);
+                    date.setDate(todayDate.getDate() - i);
+                    dates.push(date.toISOString().slice(0, 10));
                 }
 
-                return { labels: labels.slice(-7), values: values.slice(-7) };
+                return dates;
+            };
+
+            const normalizeHistory = (historyObject = {}) => {
+                const normalized = {};
+                const last7Dates = getLast7Dates();
+
+                last7Dates.forEach((date) => {
+                    normalized[date] = safeNumber(historyObject[date]);
+                });
+
+                return normalized;
+            };
+
+            const buildLast7DaysChart = (historyObject) => {
+                const normalizedHistory = normalizeHistory(historyObject || {});
+                const sortedDates = Object.keys(normalizedHistory).sort();
+                const labels = sortedDates.map((date) => {
+                    const parsedDate = new Date(date + 'T00:00:00');
+                    return parsedDate.toLocaleDateString('id-ID', { weekday: 'short' });
+                });
+                const values = sortedDates.map((date) => safeNumber(normalizedHistory[date]));
+
+                return { labels, values };
             };
 
             const renderChart = (data, labels = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']) => {
@@ -670,7 +686,7 @@
                     await set(todayRef, currentToday);
 
                     const historySnapshot = await get(historyRef);
-                    const historyData = historySnapshot.val() || {};
+                    const historyData = normalizeHistory(historySnapshot.val() || {});
                     historyData[today] = safeNumber(historyData[today]) + 1;
                     await set(historyRef, historyData);
 
@@ -688,7 +704,7 @@
                 onValue(historyRef, (snapshot) => {
                     const historyData = snapshot && snapshot.val() ? snapshot.val() : {};
                     const { labels, values } = buildLast7DaysChart(historyData);
-                    if (trendEl) trendEl.textContent = `${values.length} Hari`;
+                    if (trendEl) trendEl.textContent = `${labels.length} Hari`;
                     renderChart(values, labels);
                 });
 

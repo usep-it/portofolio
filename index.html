@@ -135,12 +135,20 @@
             --gradient-accent: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
         }
 
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
         }
 
         h1,
@@ -350,21 +358,21 @@
 
     <!-- Navigation Header -->
     <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
+        <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 sm:h-20 items-center">
                 <!-- Brand Logo -->
-                <a href="#beranda" class="group flex items-center gap-3">
+                <a href="#beranda" class="group flex items-center gap-2 sm:gap-3 flex-shrink-0">
                     <div
-                        class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary-600 to-secondary flex items-center justify-center text-white font-black text-lg shadow-glow-primary transition-transform group-hover:scale-105">
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-primary-600 to-secondary flex items-center justify-center text-white font-black text-sm sm:text-base shadow-glow-primary transition-transform group-hover:scale-105">
                         US
                     </div>
                     <div class="flex flex-col">
                         <span
-                            class="text-xl font-bold font-heading tracking-tight text-slate-900 dark:text-white group-hover:text-primary transition-colors flex items-center gap-1.5">
+                            class="text-sm sm:text-lg lg:text-xl font-bold font-heading tracking-tight text-slate-900 dark:text-white group-hover:text-primary transition-colors flex items-center gap-1.5 leading-tight">
                             Usep Suherman
                             <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                         </span>
-                        <span class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">Informatics &
+                        <span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide leading-tight">Informatics &
                             Web Dev</span>
                     </div>
                 </a>
@@ -397,16 +405,16 @@
                 </div>
 
                 <!-- Mobile Action Menu Button -->
-                <div class="lg:hidden flex items-center gap-2">
+                <div class="lg:hidden flex items-center gap-1.5 sm:gap-2">
                     <button id="theme-toggle-mobile" type="button"
-                        class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center justify-center border border-slate-200 dark:border-slate-700"
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center justify-center border border-slate-200 dark:border-slate-700 shadow-sm active:scale-95"
                         aria-label="Ganti tema">
-                        <i class="fas fa-moon text-base"></i>
+                        <i class="fas fa-moon text-sm sm:text-base"></i>
                     </button>
                     <button id="mobile-menu-btn"
-                        class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-center border border-slate-200 dark:border-slate-700 focus:outline-none"
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-center border border-slate-200 dark:border-slate-700 focus:outline-none shadow-sm active:scale-95"
                         aria-label="Buka navigasi mobile">
-                        <i class="fas fa-bars text-lg"></i>
+                        <i class="fas fa-bars text-sm sm:text-base"></i>
                     </button>
                 </div>
             </div>
@@ -414,62 +422,64 @@
 
         <!-- Mobile Drawer Menu -->
         <div id="mobile-menu"
-            class="lg:hidden hidden glass-card border-b border-slate-200 dark:border-slate-800 shadow-2xl transition-all duration-300">
-            <div class="px-5 pt-3 pb-6 space-y-1.5 max-h-[80vh] overflow-y-auto">
+            class="lg:hidden hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-b border-slate-200/80 dark:border-slate-800/80 shadow-2xl transition-all duration-300">
+            <div class="px-4 pt-3 pb-5 space-y-1 max-h-[82vh] overflow-y-auto">
                 <a href="#beranda"
-                    class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
-                    <i class="fas fa-home w-6 text-primary"></i> Beranda
+                    class="mobile-nav-link flex items-center px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800/80 hover:text-primary transition active:scale-[0.98]">
+                    <i class="fas fa-home w-7 text-primary text-sm"></i> Beranda
                 </a>
                 <a href="#tentang"
-                    class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
-                    <i class="fas fa-user w-6 text-primary"></i> Tentang Saya
+                    class="mobile-nav-link flex items-center px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800/80 hover:text-primary transition active:scale-[0.98]">
+                    <i class="fas fa-user w-7 text-primary text-sm"></i> Tentang Saya
                 </a>
                 <a href="#pengalaman"
-                    class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
-                    <i class="fas fa-briefcase w-6 text-primary"></i> Pendidikan & Pengalaman
+                    class="mobile-nav-link flex items-center px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800/80 hover:text-primary transition active:scale-[0.98]">
+                    <i class="fas fa-briefcase w-7 text-primary text-sm"></i> Pendidikan & Pengalaman
                 </a>
                 <a href="#proyek"
-                    class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
-                    <i class="fas fa-laptop-code w-6 text-primary"></i> Portofolio Proyek
+                    class="mobile-nav-link flex items-center px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800/80 hover:text-primary transition active:scale-[0.98]">
+                    <i class="fas fa-laptop-code w-7 text-primary text-sm"></i> Portofolio Proyek
                 </a>
                 <a href="#sertifikat"
-                    class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
-                    <i class="fas fa-certificate w-6 text-primary"></i> Sertifikat
+                    class="mobile-nav-link flex items-center px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800/80 hover:text-primary transition active:scale-[0.98]">
+                    <i class="fas fa-certificate w-7 text-primary text-sm"></i> Sertifikat
                 </a>
                 <a href="#sosial"
-                    class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
-                    <i class="fas fa-hashtag w-6 text-primary"></i> Aktivitas Sosial
+                    class="mobile-nav-link flex items-center px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800/80 hover:text-primary transition active:scale-[0.98]">
+                    <i class="fas fa-hashtag w-7 text-primary text-sm"></i> Aktivitas Sosial
                 </a>
                 <a href="#statistik"
-                    class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
-                    <i class="fas fa-chart-line w-6 text-primary"></i> Statistik Kunjungan
+                    class="mobile-nav-link flex items-center px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800/80 hover:text-primary transition active:scale-[0.98]">
+                    <i class="fas fa-chart-line w-7 text-primary text-sm"></i> Statistik Kunjungan
                 </a>
-                <a href="#kontak"
-                    class="mobile-nav-link flex items-center justify-center px-4 py-3.5 mt-3 rounded-xl text-base font-bold bg-primary text-white shadow-lg text-center">
-                    <i class="fas fa-paper-plane mr-2"></i> Hubungi Saya
-                </a>
+                <div class="pt-2">
+                    <a href="#kontak"
+                        class="mobile-nav-link flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-bold bg-gradient-to-r from-primary-600 via-indigo-600 to-primary-700 text-white shadow-glow-primary text-center active:scale-[0.98]">
+                        <i class="fas fa-paper-plane text-xs"></i> Hubungi Saya
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="beranda"
-        class="relative pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden flex items-center min-h-[92vh] bg-grid-pattern">
+        class="relative pt-24 pb-14 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-28 overflow-hidden flex items-center min-h-[90vh] bg-grid-pattern">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 items-center">
 
                 <!-- Left Content Column -->
                 <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 reveal-element">
                     <!-- Status Badge -->
                     <div
-                        class="inline-flex items-center gap-2.5 py-1.5 px-4 rounded-full bg-primary-50 dark:bg-primary-950/70 border border-primary-200/60 dark:border-primary-800/60 text-primary-700 dark:text-primary-300 font-semibold text-xs sm:text-sm mb-6 shadow-sm">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                        class="inline-flex items-center gap-2 py-1 px-3.5 sm:py-1.5 sm:px-4 rounded-full bg-primary-50 dark:bg-primary-950/70 border border-primary-200/60 dark:border-primary-800/60 text-primary-700 dark:text-primary-300 font-semibold text-xs sm:text-sm mb-4 sm:mb-6 shadow-sm">
+                        <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
                         <span>Mahasiswa Informatika & Praktisi IT</span>
                     </div>
 
                     <!-- Main Hero Heading -->
                     <h1
-                        class="text-4xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight text-slate-900 dark:text-white leading-[1.15] mb-4">
+                        class="text-3xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight text-slate-900 dark:text-white leading-[1.15] mb-3 sm:mb-4">
                         Halo, Saya <br class="hidden sm:inline">
                         <span
                             class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-indigo-500 to-secondary">Usep
@@ -477,9 +487,9 @@
                     </h1>
 
                     <!-- Dynamic Typing Text -->
-                    <div class="h-10 sm:h-12 flex items-center justify-center lg:justify-start mb-6">
+                    <div class="h-9 sm:h-12 flex items-center justify-center lg:justify-start mb-4 sm:mb-6">
                         <span
-                            class="text-xl sm:text-2xl lg:text-3xl font-bold font-heading text-slate-700 dark:text-slate-200">
+                            class="text-lg sm:text-2xl lg:text-3xl font-bold font-heading text-slate-700 dark:text-slate-200">
                             Fokus pada <span id="typed-text" class="text-primary-600 dark:text-primary-400"></span><span
                                 class="typed-cursor">|</span>
                         </span>
@@ -487,44 +497,44 @@
 
                     <!-- Description -->
                     <p
-                        class="text-base sm:text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                        class="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
                         Menggabungkan ketelitian rekayasa perangkat lunak dengan dedikasi nyata dalam pelayanan publik.
                         Berfokus pada pembangunan sistem informasi, aplikasi web berbasis Laravel & arsitektur data yang
                         efisien, aman, dan mudah digunakan.
                     </p>
 
                     <!-- CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-10">
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-center mb-8 sm:mb-10">
                         <a href="#proyek"
-                            class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-primary-600 via-indigo-600 to-primary-700 text-white font-bold text-base hover:shadow-glow-primary hover:scale-[1.03] active:scale-95 transition-all flex items-center justify-center gap-2 group">
+                            class="w-full sm:w-auto px-6 py-3 sm:px-7 sm:py-3.5 rounded-2xl bg-gradient-to-r from-primary-600 via-indigo-600 to-primary-700 text-white font-bold text-sm sm:text-base hover:shadow-glow-primary hover:scale-[1.03] active:scale-95 transition-all flex items-center justify-center gap-2 group">
                             <span>Jelajahi Portofolio</span>
-                            <i class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                            <i class="fas fa-arrow-right text-xs sm:text-sm group-hover:translate-x-1 transition-transform"></i>
                         </a>
                         <a href="https://github.com/usep-it" target="_blank" rel="noopener noreferrer"
-                            class="w-full sm:w-auto px-6 py-3.5 rounded-2xl glass-card text-slate-800 dark:text-slate-100 font-bold text-base hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary-400 transition-all flex items-center justify-center gap-2">
-                            <i class="fab fa-github text-xl"></i>
+                            class="w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3.5 rounded-2xl glass-card text-slate-800 dark:text-slate-100 font-bold text-sm sm:text-base hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary-400 transition-all flex items-center justify-center gap-2">
+                            <i class="fab fa-github text-lg sm:text-xl"></i>
                             <span>GitHub Profile</span>
                         </a>
                     </div>
 
                     <!-- Quick Stats Highlights Strip -->
                     <div
-                        class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 dark:border-slate-800/80 max-w-lg mx-auto lg:mx-0">
+                        class="grid grid-cols-3 gap-2 sm:gap-4 pt-5 sm:pt-6 border-t border-slate-200/80 dark:border-slate-800/80 max-w-lg mx-auto lg:mx-0">
                         <div class="text-center lg:text-left">
-                            <p class="text-2xl sm:text-3xl font-black font-heading text-slate-900 dark:text-white">3+
+                            <p class="text-xl sm:text-3xl font-black font-heading text-slate-900 dark:text-white">3+
                             </p>
-                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Proyek Utama
+                            <p class="text-[11px] sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Proyek Utama
                             </p>
                         </div>
                         <div class="text-center lg:text-left">
-                            <p class="text-2xl sm:text-3xl font-black font-heading text-slate-900 dark:text-white">4+
+                            <p class="text-xl sm:text-3xl font-black font-heading text-slate-900 dark:text-white">4+
                             </p>
-                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Sertifikasi</p>
+                            <p class="text-[11px] sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Sertifikasi</p>
                         </div>
                         <div class="text-center lg:text-left">
-                            <p class="text-2xl sm:text-3xl font-black font-heading text-slate-900 dark:text-white">2+
+                            <p class="text-xl sm:text-3xl font-black font-heading text-slate-900 dark:text-white">2+
                             </p>
-                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Tahun Dedikasi
+                            <p class="text-[11px] sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Tahun Dedikasi
                             </p>
                         </div>
                     </div>
@@ -532,7 +542,7 @@
 
                 <!-- Right Visual Column (Interactive 3D Profile Frame) -->
                 <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 reveal-element reveal-delay-200">
-                    <div class="relative w-72 h-72 sm:w-88 sm:h-88 lg:w-96 lg:h-96 flex items-center justify-center"
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 flex items-center justify-center"
                         id="hero-tilt-box">
 
                         <!-- Morphing Animated Ambient Rings -->
@@ -545,47 +555,45 @@
 
                         <!-- Profile Card Container -->
                         <div
-                            class="relative w-[92%] h-[92%] rounded-3xl p-2.5 bg-gradient-to-b from-white/80 to-white/20 dark:from-slate-700/60 dark:to-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-white/15 shadow-2xl overflow-hidden group">
+                            class="relative w-[92%] h-[92%] rounded-3xl p-2 sm:p-2.5 bg-gradient-to-b from-white/80 to-white/20 dark:from-slate-700/60 dark:to-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-white/15 shadow-2xl overflow-hidden group">
                             <img src="foto-profil.jpeg" alt="Usep Suherman"
                                 class="w-full h-full object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105"
                                 onerror="this.src='https://placehold.co/500x500/4f46e5/ffffff?text=Usep+Suherman'">
 
                             <!-- Bottom Gradient Overlay -->
                             <div
-                                class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-950/80 to-transparent flex items-end p-4 rounded-b-2xl">
+                                class="absolute inset-x-0 bottom-0 h-24 sm:h-28 bg-gradient-to-t from-slate-950/80 to-transparent flex items-end p-3 sm:p-4 rounded-b-2xl">
                                 <div>
-                                    <p class="text-xs text-indigo-300 font-bold uppercase tracking-wider">Informatics
+                                    <p class="text-[10px] sm:text-xs text-indigo-300 font-bold uppercase tracking-wider">Informatics
                                         Student</p>
-                                    <p class="text-base font-bold text-white">Universitas Sebelas April</p>
+                                    <p class="text-sm sm:text-base font-bold text-white leading-tight">Universitas Sebelas April</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Floating Glass Pill: Education (Top Right) -->
                         <div
-                            class="absolute -top-4 -right-4 sm:-right-6 glass-card p-3 sm:p-3.5 rounded-2xl shadow-xl flex items-center gap-3 animate-float-slow border border-white/70 dark:border-white/15">
+                            class="absolute -top-3 -right-2 sm:-top-4 sm:-right-6 glass-card p-2 sm:p-3.5 rounded-2xl shadow-xl flex items-center gap-2 sm:gap-3 animate-float-slow border border-white/70 dark:border-white/15">
                             <div
-                                class="w-10 h-10 rounded-xl bg-indigo-500/15 text-primary-600 dark:text-primary-400 flex items-center justify-center text-lg">
+                                class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-indigo-500/15 text-primary-600 dark:text-primary-400 flex items-center justify-center text-sm sm:text-lg flex-shrink-0">
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
                             <div>
-                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Pendidikan</p>
-                                <p class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">UNSAP
-                                    Sumedang</p>
+                                <p class="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-wider">Pendidikan</p>
+                                <p class="text-[11px] sm:text-sm font-extrabold text-slate-900 dark:text-white leading-tight">UNSAP Sumedang</p>
                             </div>
                         </div>
 
                         <!-- Floating Glass Pill: Work (Bottom Left) -->
                         <div
-                            class="absolute -bottom-4 -left-4 sm:-left-6 glass-card p-3 sm:p-3.5 rounded-2xl shadow-xl flex items-center gap-3 animate-float-fast border border-white/70 dark:border-white/15">
+                            class="absolute -bottom-3 -left-2 sm:-bottom-4 sm:-left-6 glass-card p-2 sm:p-3.5 rounded-2xl shadow-xl flex items-center gap-2 sm:gap-3 animate-float-fast border border-white/70 dark:border-white/15">
                             <div
-                                class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center text-lg">
+                                class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center text-sm sm:text-lg flex-shrink-0">
                                 <i class="fas fa-building-columns"></i>
                             </div>
                             <div>
-                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Instansi</p>
-                                <p class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">Disdik Kab.
-                                    Sumedang</p>
+                                <p class="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-wider">Instansi</p>
+                                <p class="text-[11px] sm:text-sm font-extrabold text-slate-900 dark:text-white leading-tight">Disdik Sumedang</p>
                             </div>
                         </div>
 

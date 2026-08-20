@@ -372,8 +372,6 @@
                         class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/60 transition">Beranda</a>
                     <a href="#tentang"
                         class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/60 transition">Tentang</a>
-                    <a href="#keahlian"
-                        class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/60 transition">Keahlian</a>
                     <a href="#pengalaman"
                         class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/60 transition">Pengalaman</a>
                     <a href="#proyek"
@@ -422,10 +420,6 @@
                 <a href="#tentang"
                     class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
                     <i class="fas fa-user w-6 text-primary"></i> Tentang Saya
-                </a>
-                <a href="#keahlian"
-                    class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
-                    <i class="fas fa-code w-6 text-primary"></i> Keahlian & Tech Stack
                 </a>
                 <a href="#pengalaman"
                     class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-800 hover:text-primary transition">
@@ -2401,7 +2395,7 @@
             const email = document.getElementById('email').value.trim();
             const pesan = document.getElementById('message').value.trim();
 
-            const emailTujuan = "suhermanusep30@gmail.com";
+            const emailTujuan = "f61cbfa54de7bc83f99041ed8457c46c"; // Token FormSubmit terverifikasi
 
             // Format Pesan Balasan Otomatis (Autoresponse) yang akan diterima oleh pengirim di emailnya
             const pesanBalasanOtomatis = `Halo ${nama},
@@ -2440,19 +2434,31 @@ Dinas Pendidikan Kab. Sumedang`;
                     _template: "table"
                 })
             })
-                .then(response => {
-                    if (!response.ok) throw new Error("Gagal mengirim pesan");
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
-                    msgSuccess.innerHTML = `<i class="fas fa-circle-check mr-1.5 text-sm"></i> Pesan terkirim ke Gmail saya! Email konfirmasi balasan otomatis juga telah dikirim ke <b>${email}</b>.`;
-                    msgSuccess.classList.remove('hidden');
-                    form.reset();
-                    setTimeout(() => msgSuccess.classList.add('hidden'), 9000);
+                    console.log("FormSubmit response data:", data);
+                    
+                    // FormSubmit mengembalikan success: "true" atau boolean true jika berhasil
+                    if (data.success === "true" || data.success === true) {
+                        msgSuccess.innerHTML = `<i class="fas fa-circle-check mr-1.5 text-sm"></i> <b>Berhasil!</b> Pesan telah masuk ke Gmail saya dan email balasan otomatis telah dikirim ke <b>${email}</b>.`;
+                        msgSuccess.classList.remove('hidden');
+                        form.reset();
+                        setTimeout(() => msgSuccess.classList.add('hidden'), 9000);
+                    } else if (data.message && (data.message.toLowerCase().includes('activate') || data.message.toLowerCase().includes('confirm'))) {
+                        // Jika FormSubmit butuh aktivasi pertama kali
+                        msgError.innerHTML = `<i class="fas fa-triangle-exclamation mr-1.5 text-sm"></i> <b>Aktivasi Diperlukan:</b> FormSubmit telah mengirimkan email konfirmasi ke <b>${emailTujuan}</b>. Buka Gmail Anda dan klik tombol <b>"Activate Form"</b> (1x saja) agar pesan & balasan otomatis bisa mulai terkirim.`;
+                        msgError.classList.remove('hidden');
+                    } else {
+                        // Respons lain dari FormSubmit
+                        msgSuccess.innerHTML = `<i class="fas fa-circle-check mr-1.5 text-sm"></i> Pesan terkirim! (Status: ${data.message || 'Sukses'}). Balasan otomatis dikirim ke <b>${email}</b>.`;
+                        msgSuccess.classList.remove('hidden');
+                        form.reset();
+                        setTimeout(() => msgSuccess.classList.add('hidden'), 9000);
+                    }
                 })
                 .catch(error => {
                     console.error("Form submission error:", error);
-                    msgError.innerHTML = `<i class="fas fa-circle-xmark mr-1.5 text-sm"></i> Gagal mengirim pesan. Pastikan form FormSubmit sudah diaktivasi di Gmail Anda atau hubungi langsung via email.`;
+                    msgError.innerHTML = `<i class="fas fa-circle-xmark mr-1.5 text-sm"></i> Gagal mengirim pesan ke server. Silakan hubungi langsung ke email: <b>${emailTujuan}</b>.`;
                     msgError.classList.remove('hidden');
                     setTimeout(() => msgError.classList.add('hidden'), 8000);
                 })

@@ -2407,7 +2407,8 @@
             const pesan = document.getElementById('message').value.trim();
 
             const serviceID = "service_qs2vjbc";
-            const templateID = "template_pydw339";
+            const templateAdminID = "template_ltcf92a";    // Template notifikasi masuk ke Gmail Anda
+            const templateAutoReplyID = "template_pydw339"; // Template auto-reply ke pengirim
 
             // Mengirim seluruh kombinasi variabel agar cocok dengan template EmailJS Anda
             const templateParams = {
@@ -2419,13 +2420,18 @@
                 from_email: email,
                 reply_to: email,
                 message: pesan,
-                to_name: "Usep Suherman"
+                to_name: "Usep Suherman",
+                to_email: email
             };
 
-            emailjs.send(serviceID, templateID, templateParams)
-                .then((response) => {
-                    console.log("EmailJS SUCCESS:", response.status, response.text);
-                    msgSuccess.innerHTML = `<i class="fas fa-circle-check mr-1.5 text-sm"></i> <b>Pesan Terkirim!</b> Terima kasih <b>${nama}</b>, pesan Anda telah masuk ke Gmail dan auto-reply telah dikirim ke <b>${email}</b>.`;
+            // Mengirim kedua email secara bersamaan (ke Anda dan ke pengirim)
+            Promise.all([
+                emailjs.send(serviceID, templateAdminID, templateParams),
+                emailjs.send(serviceID, templateAutoReplyID, templateParams)
+            ])
+                .then((responses) => {
+                    console.log("EmailJS SUCCESS - Both emails sent!", responses);
+                    msgSuccess.innerHTML = `<i class="fas fa-circle-check mr-1.5 text-sm"></i> <b>Pesan Terkirim!</b> Terima kasih <b>${nama}</b>, pesan Anda telah masuk ke Gmail saya dan email balasan otomatis telah dikirim ke <b>${email}</b>.`;
                     msgSuccess.classList.remove('hidden');
                     form.reset();
                     setTimeout(() => msgSuccess.classList.add('hidden'), 9000);

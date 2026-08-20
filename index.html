@@ -2411,15 +2411,14 @@
 
             // Mengirim seluruh kombinasi variabel agar cocok dengan template EmailJS Anda
             const templateParams = {
+                nama: nama,
+                email: email,
+                pesan: pesan,
                 from_name: nama,
                 name: nama,
-                user_name: nama,
                 from_email: email,
-                email: email,
-                user_email: email,
                 reply_to: email,
                 message: pesan,
-                pesan: pesan,
                 to_name: "Usep Suherman"
             };
 

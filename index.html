@@ -38,6 +38,9 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
     <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -2374,8 +2377,16 @@
 
 
         // ==========================================
-        // 11. Contact Form AJAX Submission & Auto-Reply
+        // 11. Contact Form Submission via EmailJS
         // ==========================================
+        (function initEmailJS() {
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init({
+                    publicKey: "R6-AYZDq7NJIC1Fzh"
+                });
+            }
+        })();
+
         function kirimPesanKeEmail(event) {
             event.preventDefault();
 
@@ -2395,70 +2406,35 @@
             const email = document.getElementById('email').value.trim();
             const pesan = document.getElementById('message').value.trim();
 
-            const emailTujuan = "suhermanusep30@gmail.com";
+            const serviceID = "service_qs2vjbc";
+            const templateID = "template_pydw339";
 
-            // Format Pesan Balasan Otomatis (Autoresponse) yang akan diterima oleh pengirim di emailnya
-            const pesanBalasanOtomatis = `Halo ${nama},
+            // Mengirim seluruh kombinasi variabel agar cocok dengan template EmailJS Anda
+            const templateParams = {
+                from_name: nama,
+                name: nama,
+                user_name: nama,
+                from_email: email,
+                email: email,
+                user_email: email,
+                reply_to: email,
+                message: pesan,
+                pesan: pesan,
+                to_name: "Usep Suherman"
+            };
 
-Terima kasih telah menghubungi saya melalui website portofolio resmi (Usep Suherman).
-
-Pesan Anda telah berhasil saya terima dengan rincian sebagai berikut:
---------------------------------------------------
-Nama Pengirim : ${nama}
-Alamat Email  : ${email}
-Isi Pesan     :
-"${pesan}"
---------------------------------------------------
-
-Saya akan segera meninjau pesan ini dan membalasnya secepat mungkin. Apabila ada hal mendesak, Anda juga dapat terhubung melalui LinkedIn: https://www.linkedin.com/in/usep-suherman-257673318/
-
-Salam hangat,
-Usep Suherman
-Mahasiswa S1 Teknik Informatika UNSAP & Web Developer
-Dinas Pendidikan Kab. Sumedang`;
-
-            fetch(`https://formsubmit.co/ajax/${emailTujuan}`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: nama,
-                    email: email,
-                    message: pesan,
-                    _subject: `[Portofolio Web] Pesan Baru dari ${nama}`,
-                    _replyto: email,
-                    _autoresponse: pesanBalasanOtomatis,
-                    _captcha: "false",
-                    _template: "table"
+            emailjs.send(serviceID, templateID, templateParams)
+                .then((response) => {
+                    console.log("EmailJS SUCCESS:", response.status, response.text);
+                    msgSuccess.innerHTML = `<i class="fas fa-circle-check mr-1.5 text-sm"></i> <b>Pesan Terkirim!</b> Terima kasih <b>${nama}</b>, pesan Anda telah masuk ke Gmail dan auto-reply telah dikirim ke <b>${email}</b>.`;
+                    msgSuccess.classList.remove('hidden');
+                    form.reset();
+                    setTimeout(() => msgSuccess.classList.add('hidden'), 9000);
                 })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("FormSubmit response data:", data);
-                    
-                    // FormSubmit mengembalikan success: "true" atau boolean true jika berhasil
-                    if (data.success === "true" || data.success === true) {
-                        msgSuccess.innerHTML = `<i class="fas fa-circle-check mr-1.5 text-sm"></i> <b>Berhasil!</b> Pesan telah masuk ke Gmail saya dan email balasan otomatis telah dikirim ke <b>${email}</b>.`;
-                        msgSuccess.classList.remove('hidden');
-                        form.reset();
-                        setTimeout(() => msgSuccess.classList.add('hidden'), 9000);
-                    } else if (data.message && (data.message.toLowerCase().includes('activate') || data.message.toLowerCase().includes('confirm'))) {
-                        // Jika FormSubmit butuh aktivasi pertama kali
-                        msgError.innerHTML = `<i class="fas fa-triangle-exclamation mr-1.5 text-sm"></i> <b>Aktivasi Diperlukan:</b> FormSubmit telah mengirimkan email konfirmasi ke <b>${emailTujuan}</b>. Buka Gmail Anda dan klik tombol <b>"Activate Form"</b> (1x saja) agar pesan & balasan otomatis bisa mulai terkirim.`;
-                        msgError.classList.remove('hidden');
-                    } else {
-                        // Respons lain dari FormSubmit
-                        msgSuccess.innerHTML = `<i class="fas fa-circle-check mr-1.5 text-sm"></i> Pesan terkirim! (Status: ${data.message || 'Sukses'}). Balasan otomatis dikirim ke <b>${email}</b>.`;
-                        msgSuccess.classList.remove('hidden');
-                        form.reset();
-                        setTimeout(() => msgSuccess.classList.add('hidden'), 9000);
-                    }
-                })
-                .catch(error => {
-                    console.error("Form submission error:", error);
-                    msgError.innerHTML = `<i class="fas fa-circle-xmark mr-1.5 text-sm"></i> Gagal mengirim pesan ke server. Silakan hubungi langsung ke email: <b>${emailTujuan}</b>.`;
+                .catch((error) => {
+                    console.error("EmailJS ERROR:", error);
+                    const errorMsg = error?.text || error?.message || 'Terjadi kendala saat mengirim';
+                    msgError.innerHTML = `<i class="fas fa-circle-xmark mr-1.5 text-sm"></i> <b>Gagal mengirim:</b> ${errorMsg}. Silakan coba lagi atau hubungi via LinkedIn.`;
                     msgError.classList.remove('hidden');
                     setTimeout(() => msgError.classList.add('hidden'), 8000);
                 })
